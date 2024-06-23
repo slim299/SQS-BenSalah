@@ -28,6 +28,7 @@ describe('Todo App', () => {
 
    
     cy.get('li#todo-1').find('button').contains('Delete').click()
+    cy.get('li#todo-3').find('button').contains('Delete').click()
     cy.contains('Buy groceries').should('not.exist')
   })
 })
