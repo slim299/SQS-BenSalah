@@ -26,8 +26,9 @@ jobs:
 
       - name: Set execute permissions for Jest
         run: npm i -g jest
-        
-      
+
+      - name: Run unit tests
+        run: npm test
 
       - name: Run Prettier
         run: npm run analysis
