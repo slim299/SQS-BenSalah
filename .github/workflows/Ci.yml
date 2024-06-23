@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'v20.12.2' 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set execute permissions for Jest
+        run: npm i -g jest
+        
+      
+
+      - name: Run Prettier
+        run: npm run analysis
+
+      - name: Run Performance Tests
+        run: npm run performance
+
+      - name: Audit Dependencies
+        run: npm run dependency_audit
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'v20.12.2'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress E2E tests
+        run: npm run e2e
